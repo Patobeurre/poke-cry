@@ -2,6 +2,7 @@
     <div>
       <div v-if="showImage">
         <img :src="'/images/' + pokemon.image_path"/>
+        <h2>{{ pokemon.name }}</h2>
       </div>
 
       <div>

@@ -1,9 +1,15 @@
 <script setup lang="ts">
   import ChallengePage from './views/ChallengePage.vue'
+  import HeaderTitle from './components/HeaderTitle.vue'
+
+  const title :string = "C koi le cri du pokemon"
 </script>
 
 <template>
-  <ChallengePage />
+  <div class="wrapper">
+    <HeaderTitle :title="title" />
+    <ChallengePage />
+  </div>
 </template>
 
 <style scoped>
@@ -18,5 +24,8 @@
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+.wrapper {
+  min-height: 100vh;
 }
 </style>

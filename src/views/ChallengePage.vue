@@ -22,6 +22,8 @@
     const correctPokemon = ref(null)
     const isValidated = ref(false)
 
+    const NB_PROPAL: number = 6
+
 
     onMounted(async () => {
         try {
@@ -69,7 +71,7 @@
 
     function choosePokemonAndPropositions() {
         isValidated.value = false
-        proposedPokemons.value = getRandomSubarray(data.value, 4)
+        proposedPokemons.value = getRandomSubarray(data.value, NB_PROPAL)
         correctPokemon.value = pickRandom(proposedPokemons.value)
     }
 
