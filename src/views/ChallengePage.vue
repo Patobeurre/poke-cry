@@ -3,7 +3,8 @@
         <PokemonContainer
             :pokemon="correctPokemon"
             :propositions="proposedPokemons"
-            v-model="isValidated"
+            :showImage="isValidated"
+            v-model="pokemonSelected"
         />
     </div>
     <div>
@@ -21,8 +22,11 @@
     const proposedPokemons = ref(null)
     const correctPokemon = ref(null)
     const isValidated = ref(false)
+    const pokemonSelected = ref(0)
 
     const NB_PROPAL: number = 6
+    const audio_success = new Audio('/sound-effects/button-success.mp3')
+    const audio_failure = new Audio('/sound-effects/button-failure.mp3')
 
 
     onMounted(async () => {
@@ -93,6 +97,14 @@
     }
 
     function handleValidate() {
+        if (!isValidated.value) {
+            if (pokemonSelected.value == correctPokemon.value.id) {
+                audio_success.play()
+            }
+            else {
+                audio_failure.play()
+            }
+        }
         isValidated.value = true
     }
 

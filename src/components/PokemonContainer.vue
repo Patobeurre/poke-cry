@@ -29,13 +29,12 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  const showImage = defineModel()
-
-  const selectedId = ref(0)
+  const selectedId = defineModel()
 
   defineProps<{
     pokemon: any,
-    propositions: any
+    propositions: any,
+    showImage: boolean
   }>()
 
 </script>
