@@ -38,8 +38,8 @@
   const selectedId = ref(0)
 
   defineProps<{
-    pokemon: Object,
-    propositions: Array<Object>
+    pokemon: any,
+    propositions: any
   }>()
 
   function handleValidate(correctId: number) {

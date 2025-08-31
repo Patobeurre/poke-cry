@@ -8,13 +8,14 @@
 </template>
 
 
-<script setup>
+<script setup lang="ts">
     import PokemonContainer from '../components/PokemonContainer.vue'
     import { ref, onMounted } from 'vue'
 
     const data = ref(null)
     const proposedPokemons = ref(null)
     const correctPokemon = ref(null)
+    const fileExists = ref(false)
 
     onMounted(async () => {
         try {
@@ -30,26 +31,28 @@
         }
     })
 
-    async function checkFile(path) {
+    async function checkFile(path: string) {
         try {
             const response = await fetch(path, { method: 'HEAD' })
             console.log(response)
             if (!response.ok) throw new Error('Erreur de chargement')
-            return true
+            fileExists.value = true
         } catch (error) {
-            return false
+            fileExists.value = false
         }
     }
 
-    function cleanData(arr) {
-        var cleanedData = []
+    function cleanData(arr: any) {
+        var cleanedData :any = []
         for (const pokemon of arr) {
-            if (checkFile("/audio/" + pokemon.audio_path)) {
-                cleanedData.push(pokemon)
-            }
-            else {
-                console.log(pokemon)
-            }
+            checkFile("/audio/" + pokemon.audio_path).then(function () {
+                if (fileExists.value) {
+                    cleanedData.push(pokemon)
+                }
+                else {
+                    console.log(pokemon)
+                }
+            });
         }  
         console.log(cleanedData)  
         data.value = cleanedData
@@ -62,7 +65,7 @@
         correctPokemon.value = pickRandom(proposedPokemons.value)
     }
 
-    function getRandomSubarray(arr, size) {
+    function getRandomSubarray(arr: any, size: number) {
         var shuffled = arr.slice(0), i = arr.length, temp, index;
         while (i--) {
             index = Math.floor((i + 1) * Math.random());
@@ -73,7 +76,7 @@
         return shuffled.slice(0, size);
     }
 
-    function pickRandom(arr) {
+    function pickRandom(arr: any) {
         return arr[Math.floor(Math.random()*arr.length)];
     }
 
