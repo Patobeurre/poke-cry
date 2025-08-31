@@ -32,7 +32,7 @@
             if (!response.ok) throw new Error('Erreur de chargement')
             data.value = await response.json()
 
-            cleanData(data.value)
+            choosePokemonAndPropositions()
 
         } catch (error) {
             console.log(error)
