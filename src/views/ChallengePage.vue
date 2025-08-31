@@ -3,7 +3,12 @@
         <PokemonContainer
             :pokemon="correctPokemon"
             :propositions="proposedPokemons"
+            v-model="isValidated"
         />
+    </div>
+    <div>
+        <Button @click="handleValidate">Validate</Button>
+        <Button @click="handleNext">Next</Button>
     </div>
 </template>
 
@@ -15,7 +20,8 @@
     const data = ref(null)
     const proposedPokemons = ref(null)
     const correctPokemon = ref(null)
-    //const fileExists = ref(false)
+    const isValidated = ref(false)
+
 
     onMounted(async () => {
         try {
@@ -54,7 +60,7 @@
             else {
                 console.log("MISSING " + pokemon)
             }
-        }  
+        }
         console.log(cleanedData)
         data.value = cleanedData
 
@@ -62,6 +68,7 @@
     }
 
     function choosePokemonAndPropositions() {
+        isValidated.value = false
         proposedPokemons.value = getRandomSubarray(data.value, 4)
         correctPokemon.value = pickRandom(proposedPokemons.value)
     }
@@ -79,6 +86,14 @@
 
     function pickRandom(arr: any) {
         return arr[Math.floor(Math.random()*arr.length)];
+    }
+
+    function handleValidate() {
+        isValidated.value = true
+    }
+
+    function handleNext() {
+        choosePokemonAndPropositions()
     }
 
 </script>

@@ -5,10 +5,6 @@
       </div>
 
       <div>
-        <Button @click="showImage = !showImage">Show</Button>
-      </div>
-
-      <div>
         <audio :src="'/audio/' + pokemon.audio_path" controls/>
       </div>
 
@@ -23,10 +19,6 @@
           {{ p.name }}
         </label>
       </div>
-
-      <div>
-        <Button @click="handleValidate(pokemon.id)">Validate</Button>
-      </div>
     </div>
 </template>
 
@@ -34,19 +26,14 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  const showImage = ref(false)
+  const showImage = defineModel()
+
   const selectedId = ref(0)
 
   defineProps<{
     pokemon: any,
     propositions: any
   }>()
-
-  function handleValidate(correctId: number) {
-    if (correctId === selectedId.value) {
-      console.log("YOUPI")
-    }
-  }
 
 </script>
 
