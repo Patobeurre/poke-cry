@@ -15,5 +15,6 @@
   top: 0;
   /* position: fixed; */
   width: 100%;
+  padding: 2rem;
 }
 </style>

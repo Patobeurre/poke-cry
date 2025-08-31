@@ -7,8 +7,8 @@
         />
     </div>
     <div>
-        <Button @click="handleValidate">Validate</Button>
-        <Button @click="handleNext">Next</Button>
+        <Button class="btn" :class="isValidated ? 'btn-disabled' : 'btn-primary'" @click="handleValidate">Validate</Button>
+        <Button class="btn btn-primary" v-if="isValidated" @click="handleNext">Next</Button>
     </div>
 </template>
 
