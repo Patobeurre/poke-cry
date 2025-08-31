@@ -1,15 +1,14 @@
 <template>
     <div>
-      <div v-if="showImage">
-        <img :src="'/images/' + pokemon.image_path"/>
-        <h2>{{ pokemon.name }}</h2>
-      </div>
-
-      <div>
+       <div>
         <audio :src="'/audio/' + pokemon.audio_path" autoplay controls/>
       </div>
 
-      <div class="propals" v-if="!showImage"> 
+      <div v-if="showImage" class="portrait">
+        <img :src="'/images/' + pokemon.image_path"/>
+        <h2>{{ pokemon.name }}</h2>
+      </div>
+      <div v-else class="propals"> 
         <div class="btn-propal" v-for="p in propositions" :key="p.id">
             <label class="btn">
               <input
@@ -44,6 +43,13 @@
   margin: 0.5rem;
 }
 .propals {
+  padding: 1rem;
+}
+.portrait {
+  height: 20em;
+}
+.portrait img{
+  height: 80%;
   padding: 1rem;
 }
 </style>
