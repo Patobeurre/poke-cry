@@ -20,7 +20,7 @@
 
     const data = ref(null)
     const proposedPokemons = ref(null)
-    const correctPokemon = ref(null)
+    const correctPokemon = ref<any>(null)
     const isValidated = ref(false)
     const pokemonSelected = ref(0)
 
@@ -92,7 +92,7 @@
         return shuffled.slice(0, size);
     }
 
-    function pickRandom(arr: any) {
+    function pickRandom(arr: any) :any {
         return arr[Math.floor(Math.random()*arr.length)];
     }
 
