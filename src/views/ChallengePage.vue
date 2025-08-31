@@ -39,6 +39,7 @@
         }
     })
 
+    /*
     async function checkFile(path: string) {
         try {
             const response = await fetch(path, { method: 'HEAD' })
@@ -68,6 +69,7 @@
 
         choosePokemonAndPropositions()
     }
+    */
 
     function choosePokemonAndPropositions() {
         isValidated.value = false
