@@ -15,7 +15,7 @@
     const data = ref(null)
     const proposedPokemons = ref(null)
     const correctPokemon = ref(null)
-    const fileExists = ref(false)
+    //const fileExists = ref(false)
 
     onMounted(async () => {
         try {
@@ -34,27 +34,28 @@
     async function checkFile(path: string) {
         try {
             const response = await fetch(path, { method: 'HEAD' })
-            console.log(response)
             if (!response.ok) throw new Error('Erreur de chargement')
-            fileExists.value = true
+            //fileExists.value = true
+            return true
         } catch (error) {
-            fileExists.value = false
+            //fileExists.value = false
+            return false
         }
     }
 
-    function cleanData(arr: any) {
+    async function cleanData(arr: any) {
         var cleanedData :any = []
         for (const pokemon of arr) {
-            checkFile("/audio/" + pokemon.audio_path).then(function () {
-                if (fileExists.value) {
-                    cleanedData.push(pokemon)
-                }
-                else {
-                    console.log(pokemon)
-                }
-            });
+            const fileExists = await checkFile("/audio/" + pokemon.audio_path)
+            if (fileExists) {
+                cleanedData.push(pokemon)
+                console.log("ADDED " + pokemon.name)
+            }
+            else {
+                console.log("MISSING " + pokemon)
+            }
         }  
-        console.log(cleanedData)  
+        console.log(cleanedData)
         data.value = cleanedData
 
         choosePokemonAndPropositions()
