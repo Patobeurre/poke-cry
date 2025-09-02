@@ -52,7 +52,7 @@
     init();
   })
 
-  watch(() => props.pokemon.id, (newVal, oldVal) => {
+  watch(() => props.pokemon.id, () => {
     console.log("pokemon changed")
     init();
   })
