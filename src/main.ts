@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import PrimeVue from 'primevue/config';
 
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import './style.css'
@@ -15,11 +17,13 @@ import App from './App.vue'
 import HomeView from './views/HomeView.vue'
 import ChallengeView from './views/ChallengeView.vue'
 import CollectionView from './views/CollectionView.vue'
+import AboutView from './views/AboutView.vue'
 
 const routes = [
   { path: '/', component: HomeView },
   { path: '/challenge', component: ChallengeView },
   { path: '/collection', component: CollectionView },
+  { path: '/about', component: AboutView },
 ]
 
 const router = createRouter({

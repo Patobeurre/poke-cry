@@ -70,7 +70,7 @@
         />
     </div>
     <div>
-        <Button class="btn" :class="isValidated ? 'btn-disabled' : 'btn-primary'" @click="handleValidate">Validate</Button>
+        <Button class="btn btn-primary" v-if="!isValidated" @click="handleValidate">Validate</Button>
         <Button class="btn btn-primary" v-if="isValidated" @click="handleNext">Next</Button>
     </div>
 </template>

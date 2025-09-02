@@ -4,6 +4,7 @@
         id="single-select-search"
         v-model="selectedItem"
         :options="options"
+        :placeholder="placeholderTxt"
         label="name"
         track-by="name">
     </multiselect>
@@ -14,7 +15,8 @@
     import Multiselect from 'vue-multiselect'
 
     defineProps<{
-        options: any
+        options: any,
+        placeholderTxt: string
     }>()
 
     const selectedItem :any = defineModel();

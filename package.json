@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "material-design-icons-iconfont": "^6.7.0",
     "primevue": "^4.3.7",
     "vue": "^3.5.18",
     "vue-multiselect": "^3.3.1",
@@ -18,10 +20,12 @@
     "vuetify": "^3.9.6"
   },
   "devDependencies": {
+    "@iconify/json": "^2.2.380",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.7.0",
     "typescript": "~5.8.3",
     "vite": "^7.1.2",
+    "vite-plugin-icons": "^0.6.5",
     "vue-tsc": "^3.0.5"
   }
 }

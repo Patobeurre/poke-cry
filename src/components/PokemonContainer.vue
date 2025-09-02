@@ -11,10 +11,11 @@
       <div v-else class="propals">
         <SelectForm
           :options="searchPropositions"
+          :placeholderTxt="'Type your answer'"
           v-model="selectedPokemon"
         />
 
-        <v-btn v-if="!isSuggestionsShown" @click="useSuggestions">Show suggestions</v-btn>
+        <v-btn v-if="!isSuggestionsShown" class="btn-suggestions" @click="useSuggestions">Show suggestions</v-btn>
 
         <div v-if="isSuggestionsShown" class="btn-propal" v-for="p in propositions" :key="p.id">
             <label class="btn">
@@ -71,17 +72,18 @@
 
 
 <style scoped>
-.btn-propal {
-  margin: 0.5rem;
+.btn-propal, .btn-suggestions {
+  margin: 1vh;
 }
 .propals {
-  padding: 1rem;
+  padding: 1vh;
 }
 .portrait {
   height: 20em;
 }
 .portrait img{
-  height: 80%;
-  padding: 1rem;
+  max-width: 80vw;
+  max-height: 80%;
+  padding: 1vh;
 }
 </style>
