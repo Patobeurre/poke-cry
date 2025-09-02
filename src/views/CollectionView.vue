@@ -21,7 +21,7 @@
   function onSearchTxtUpdated() {
     if (searchText.value.trim()) {
       pokemonsList.value = pokemonStore.pokemons.filter(function(p :PokemonDTO) {
-        return p.name.toLowerCase().includes(searchText.value)
+        return p.name.toLowerCase().includes(searchText.value.toLowerCase())
       })
     }
     else {
