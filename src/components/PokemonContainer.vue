@@ -1,6 +1,6 @@
 <template>
     <div>
-       <div>
+      <div>
         <audio :src="'/audio/' + pokemon.audio_path" autoplay controls/>
       </div>
 
@@ -8,14 +8,21 @@
         <img :src="'/images/' + pokemon.image_path"/>
         <h2>{{ pokemon.name }}</h2>
       </div>
-      <div v-else class="propals"> 
-        <div class="btn-propal" v-for="p in propositions" :key="p.id">
+      <div v-else class="propals">
+        <SelectForm
+          :options="searchPropositions"
+          v-model="selectedPokemon"
+        />
+
+        <v-btn v-if="!isSuggestionsShown" @click="useSuggestions">Show suggestions</v-btn>
+
+        <div v-if="isSuggestionsShown" class="btn-propal" v-for="p in propositions" :key="p.id">
             <label class="btn">
               <input
                 type="radio"
                 name="pokemons"
                 :value="p.id"
-                v-model="selectedId"
+                v-model="selectedPokemon.id"
               />
               {{ p.name }}
             </label>
@@ -26,14 +33,39 @@
 
 
 <script setup lang="ts">
+  import { inject, onMounted, ref, watch } from 'vue';
+  import SelectForm from './SelectForm.vue';
 
-  const selectedId = defineModel()
+  const pokemonStore :any = inject('pokemonStore');
 
-  defineProps<{
-    pokemon: any,
-    propositions: any,
+  const selectedPokemon :PokemonDTO = defineModel()
+  const searchPropositions = ref<PokemonDTO[]>([])
+  const isSuggestionsShown = ref(false)
+
+  const props = defineProps<{
+    pokemon: PokemonDTO,
+    propositions: PokemonDTO[],
     showImage: boolean
   }>()
+
+  onMounted(() => {
+    init();
+  })
+
+  watch(() => props.pokemon.id, (newVal, oldVal) => {
+    console.log("pokemon changed")
+    init();
+  })
+
+  function init() {
+    searchPropositions.value = pokemonStore.pokemons;
+    isSuggestionsShown.value = false;
+  }
+
+  function useSuggestions() {
+    searchPropositions.value = props.propositions
+    isSuggestionsShown.value = true;
+  }
 
 </script>
 

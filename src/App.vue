@@ -1,15 +1,27 @@
 <script setup lang="ts">
-  import ChallengePage from './views/ChallengePage.vue'
-  import HeaderTitle from './components/HeaderTitle.vue'
-
-  const title :string = "C koi le cri du pokemon"
+  const title :string = "C qui qui cri ?"
 </script>
 
 <template>
-  <div class="wrapper">
-    <HeaderTitle :title="title" />
-    <ChallengePage />
-  </div>
+  <v-app>
+    <v-app-bar :elevation="2">
+      <template v-slot:prepend>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      </template>
+      <v-app-bar-title>{{ title }}</v-app-bar-title>
+      <v-btn to="/">Home</v-btn>
+      <v-btn to="/challenge">Challenge</v-btn>
+      <v-btn to="/collection">List</v-btn>
+    </v-app-bar>
+    
+    <v-main>
+      <v-container class="pa-4">
+        <router-view />
+      </v-container>
+    </v-main>
+  </v-app>
+   
+  
 </template>
 
 <style scoped>

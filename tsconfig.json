@@ -5,6 +5,7 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "lib": [ "es2015" ]
+    "lib": [ "es2015" ],
+    "types": ["./src/types"]
   }
 }

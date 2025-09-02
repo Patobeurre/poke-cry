@@ -19,10 +19,10 @@
     import { ref, onMounted } from 'vue'
 
     const data = ref(null)
-    const proposedPokemons = ref(null)
-    const correctPokemon = ref<any>(null)
+    const proposedPokemons = ref<PokemonDTO[]>([])
+    const correctPokemon = ref<PokemonDTO>(null)
     const isValidated = ref(false)
-    const pokemonSelected = ref(0)
+    const pokemonSelected = ref<PokemonDTO>({id:0, name:"", image_path:"", audio_path:""})
 
     const NB_PROPAL: number = 6
     const audio_success = new Audio('/sound-effects/button-success.mp3')
@@ -42,6 +42,50 @@
             console.log(error)
         }
     })
+
+    function choosePokemonAndPropositions() {
+        isValidated.value = false
+        proposedPokemons.value = getRandomSubarray(data.value, NB_PROPAL)
+        correctPokemon.value = pickRandom(proposedPokemons.value)
+    }
+
+    function getRandomSubarray(arr: any, size: number) {
+        var shuffled = arr.slice(0), i = arr.length, temp, index;
+        while (i--) {
+            index = Math.floor((i + 1) * Math.random());
+            temp = shuffled[index];
+            shuffled[index] = shuffled[i];
+            shuffled[i] = temp;
+        }
+        return shuffled.slice(0, size);
+    }
+
+    function pickRandom(arr: any) :any {
+        return arr[Math.floor(Math.random()*arr.length)];
+    }
+
+    function handleValidate() {
+        if (!isValidated.value) {
+            if (pokemonSelected.value.id == correctPokemon.value.id) {
+                audio_success.play()
+            }
+            else {
+                audio_failure.play()
+            }
+        }
+        isValidated.value = true
+    }
+
+    /*
+    function onFinished(isSuccess: boolean) {
+        if (!isSuccess) {
+            audio_success.play()
+        }
+        else {
+            audio_failure.play()
+        }
+    }
+    */
 
     /*
     async function checkFile(path: string) {
@@ -74,39 +118,6 @@
         choosePokemonAndPropositions()
     }
     */
-
-    function choosePokemonAndPropositions() {
-        isValidated.value = false
-        proposedPokemons.value = getRandomSubarray(data.value, NB_PROPAL)
-        correctPokemon.value = pickRandom(proposedPokemons.value)
-    }
-
-    function getRandomSubarray(arr: any, size: number) {
-        var shuffled = arr.slice(0), i = arr.length, temp, index;
-        while (i--) {
-            index = Math.floor((i + 1) * Math.random());
-            temp = shuffled[index];
-            shuffled[index] = shuffled[i];
-            shuffled[i] = temp;
-        }
-        return shuffled.slice(0, size);
-    }
-
-    function pickRandom(arr: any) :any {
-        return arr[Math.floor(Math.random()*arr.length)];
-    }
-
-    function handleValidate() {
-        if (!isValidated.value) {
-            if (pokemonSelected.value == correctPokemon.value.id) {
-                audio_success.play()
-            }
-            else {
-                audio_failure.play()
-            }
-        }
-        isValidated.value = true
-    }
 
     function handleNext() {
         choosePokemonAndPropositions()
